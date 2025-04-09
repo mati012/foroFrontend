@@ -1,0 +1,154 @@
+.forum-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .forum-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .forum-layout {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .forum-sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .forum-content {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .topic-list {
+    margin-bottom: 20px;
+  }
+  
+  .topic-item {
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .topic-item:hover {
+    background-color: #e9ecef;
+  }
+  
+  .topic-item.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .create-post-btn-container {
+    margin-top: 20px;
+  }
+  
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+  }
+  
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #007bff;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .no-posts {
+    text-align: center;
+    padding: 30px;
+    color: #6c757d;
+  }
+  
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .post-card {
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    transition: box-shadow 0.3s;
+  }
+  
+  .post-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .post-title a {
+    color: #212529;
+    text-decoration: none;
+  }
+  
+  .post-title a:hover {
+    color: #007bff;
+  }
+  
+  .post-content {
+    margin-bottom: 15px;
+    color: #495057;
+  }
+  
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #6c757d;
+  }

@@ -1,0 +1,78 @@
+<div class="create-post-container">
+    <div class="back-link">
+      <a routerLink="/foro">← Volver al foro</a>
+    </div>
+  
+    <div class="create-post-card">
+      <h2>Crear Nueva Publicación</h2>
+      
+      <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+      </div>
+      
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+      
+      <form *ngIf="!loading" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="titulo">Título</label>
+          <input
+            type="text"
+            formControlName="titulo"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': f['titulo'].errors && f['titulo'].touched }"
+          />
+          <div *ngIf="f['titulo'].errors && f['titulo'].touched" class="invalid-feedback">
+            <div *ngIf="f['titulo'].errors['required']">El título es requerido</div>
+            <div *ngIf="f['titulo'].errors['minlength']">El título debe tener al menos 5 caracteres</div>
+            <div *ngIf="f['titulo'].errors['maxlength']">El título no debe exceder los 100 caracteres</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="topico_id">Categoría</label>
+          <select
+            formControlName="topico_id"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': f['topico_id'].errors && f['topico_id'].touched }"
+          >
+            <option value="">Selecciona una categoría</option>
+            <option *ngFor="let topic of topics" [value]="topic.id">
+              {{ topic.nombre }}
+            </option>
+          </select>
+          <div *ngIf="f['topico_id'].errors && f['topico_id'].touched" class="invalid-feedback">
+            <div *ngIf="f['topico_id'].errors['required']">La categoría es requerida</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="contenido">Contenido</label>
+          <textarea
+            rows="10"
+            formControlName="contenido"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': f['contenido'].errors && f['contenido'].touched }"
+          ></textarea>
+          <div *ngIf="f['contenido'].errors && f['contenido'].touched" class="invalid-feedback">
+            <div *ngIf="f['contenido'].errors['required']">El contenido es requerido</div>
+            <div *ngIf="f['contenido'].errors['minlength']">El contenido debe tener al menos 20 caracteres</div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" routerLink="/foro">Cancelar</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="postForm.invalid || submitting"
+          >
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1"></span>
+            Publicar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

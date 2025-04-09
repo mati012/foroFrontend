@@ -1,0 +1,139 @@
+.main-footer {
+    background-color: #343a40;
+    color: white;
+    padding: 50px 0 20px;
+    margin-top: 50px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .footer-logo {
+    flex: 0 0 100%;
+    max-width: 300px;
+    margin-bottom: 30px;
+  }
+  
+  .footer-logo img {
+    height: 50px;
+    margin-bottom: 15px;
+  }
+  
+  .footer-logo h3 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+  }
+  
+  .footer-logo p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .footer-links, .footer-social {
+    flex: 0 0 100%;
+    max-width: 200px;
+    margin-bottom: 30px;
+  }
+  
+  .footer-links h4, .footer-social h4 {
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .footer-links h4:after, .footer-social h4:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #007bff;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .footer-links a:hover {
+    color: white;
+  }
+  
+  .social-icons {
+    display: flex;
+  }
+  
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .social-icons a:hover {
+    background-color: #007bff;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    text-align: center;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .footer-logo, .footer-links, .footer-social {
+      max-width: 100%;
+    }
+    
+    .footer-links h4:after, .footer-social h4:after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .social-icons {
+      justify-content: center;
+    }
+  }

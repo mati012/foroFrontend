@@ -1,0 +1,39 @@
+<header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a routerLink="/">
+          <img src="/src/assets/cine.png" alt="Logo Foro de Películas" />
+          <span>Foro de Películas</span>
+        </a>
+      </div>
+      
+      <nav class="main-nav">
+        <ul>
+          <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
+          <li><a routerLink="/foro" routerLinkActive="active">Foro</a></li>
+          
+          <!-- Mostrar enlaces de administrador si el usuario es admin -->
+          <li *ngIf="isAdmin()"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+        </ul>
+      </nav>
+      
+      <div class="user-actions">
+        <ng-container *ngIf="currentUser; else loggedOut">
+          <div class="dropdown">
+            <button class="dropdown-toggle">
+              {{ currentUser.username }} <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu">
+              <a routerLink="/auth/perfil">Mi Perfil</a>
+              <a href="javascript:void(0)" (click)="logout()">Cerrar Sesión</a>
+            </div>
+          </div>
+        </ng-container>
+        
+        <ng-template #loggedOut>
+          <a routerLink="/auth/login" class="btn btn-login">Iniciar Sesión</a>
+          <a routerLink="/auth/registro" class="btn btn-register">Registrarse</a>
+        </ng-template>
+      </div>
+    </div>
+  </header>

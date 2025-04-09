@@ -1,0 +1,70 @@
+<div class="forum-container">
+    <h1 class="forum-title">Foro de Películas</h1>
+    
+    <div class="forum-layout">
+      <!-- Sidebar con los tópicos -->
+      <div class="forum-sidebar">
+        <h3>Categorías</h3>
+        
+        <div class="topic-list">
+          <div 
+            class="topic-item" 
+            [class.active]="!selectedTopic"
+            (click)="filterByTopic(null)"
+          >
+            Todas las categorías
+          </div>
+          
+          <div 
+            *ngFor="let topic of topics" 
+            class="topic-item" 
+            [class.active]="selectedTopic?.id === topic.id"
+            (click)="filterByTopic(topic)"
+          >
+            {{ topic.nombre }}
+          </div>
+        </div>
+        
+        <div class="create-post-btn-container">
+          <a routerLink="/foro/crear" class="btn btn-primary">Crear Publicación</a>
+        </div>
+      </div>
+      
+      <!-- Lista de publicaciones -->
+      <div class="forum-content">
+        <div *ngIf="loading" class="loading-spinner">
+          <div class="spinner"></div>
+          <p>Cargando publicaciones...</p>
+        </div>
+        
+        <div *ngIf="error" class="alert alert-danger">
+          {{ error }}
+        </div>
+        
+        <div *ngIf="!loading && !error">
+          <h2 *ngIf="selectedTopic">
+            {{ selectedTopic.nombre }}
+            <small>{{ selectedTopic.descripcion }}</small>
+          </h2>
+          
+          <h2 *ngIf="!selectedTopic">Todas las publicaciones</h2>
+          
+          <div *ngIf="filteredPosts.length === 0" class="no-posts">
+            <p>No hay publicaciones en esta categoría.</p>
+          </div>
+          
+          <div class="post-list">
+            <div *ngFor="let post of filteredPosts" class="post-card">
+              <h3 class="post-title">
+                <a [routerLink]="['/foro/publicacion', post.id]">{{ post.titulo }}</a>
+              </h3>
+              <p class="post-content">{{ post.contenido | slice:0:150 }}{{ post.contenido.length > 150 ? '...' : '' }}</p>
+              <div class="post-meta">
+                <span class="post-author">Por: {{ post.autor }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

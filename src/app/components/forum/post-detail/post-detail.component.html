@@ -1,0 +1,89 @@
+<div class="post-detail-container">
+    <div class="back-link">
+      <a routerLink="/foro">← Volver al foro</a>
+    </div>
+  
+    <div *ngIf="loading" class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Cargando publicación...</p>
+    </div>
+    
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+    
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+    </div>
+    
+    <div *ngIf="!loading && post" class="post-content-container">
+      <div class="post-header">
+        <h1>{{ post.titulo }}</h1>
+        <div class="post-meta">
+          <span class="post-author">Por: {{ post.autor }}</span>
+          <div *ngIf="isAdmin()" class="admin-actions">
+            <button (click)="deletePost()" class="btn btn-danger btn-sm">
+              Eliminar Publicación
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="post-content">
+        <p>{{ post.contenido }}</p>
+      </div>
+      
+      <div class="comments-section">
+        <h3>Comentarios ({{ comments.length }})</h3>
+        
+        <div *ngIf="isLoggedIn()" class="comment-form">
+          <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
+            <div class="form-group">
+              <textarea 
+                rows="4" 
+                formControlName="mensaje" 
+                placeholder="Escribe un comentario..." 
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f['mensaje'].errors && f['mensaje'].touched }"
+              ></textarea>
+              <div *ngIf="f['mensaje'].errors && f['mensaje'].touched" class="invalid-feedback">
+                <div *ngIf="f['mensaje'].errors['required']">El comentario es requerido</div>
+                <div *ngIf="f['mensaje'].errors['minlength']">El comentario debe tener al menos 5 caracteres</div>
+              </div>
+            </div>
+            
+            <button 
+              type="submit" 
+              class="btn btn-primary" 
+              [disabled]="commentForm.invalid || submitting"
+            >
+              <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1"></span>
+              Publicar Comentario
+            </button>
+          </form>
+        </div>
+        
+        <div *ngIf="!isLoggedIn()" class="login-prompt">
+          <p>Debes <a routerLink="/auth/login">iniciar sesión</a> para comentar.</p>
+        </div>
+        
+        <div class="comments-list">
+          <div *ngIf="comments.length === 0" class="no-comments">
+            <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+          </div>
+          
+          <div *ngFor="let comment of comments" class="comment-card">
+            <div class="comment-header">
+              <span class="comment-author">{{ comment.autor }}</span>
+              <div *ngIf="isAdmin()" class="admin-actions">
+                <button (click)="deleteComment(comment.id!)" class="btn btn-danger btn-sm">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+            <p class="comment-text">{{ comment.mensaje }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

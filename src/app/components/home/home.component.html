@@ -1,0 +1,73 @@
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Bienvenido al Foro de Películas</h1>
+        <p>Un espacio para compartir y discutir sobre tus películas favoritas</p>
+        <div class="hero-buttons">
+          <a routerLink="/foro" class="btn btn-primary">Explorar Foro</a>
+          <a routerLink="/auth/registro" class="btn btn-outline">Registrarse</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección de Publicaciones Recientes -->
+    <section class="recent-posts">
+      <div class="section-header">
+        <h2>Publicaciones Recientes</h2>
+        <a routerLink="/foro" class="view-all">Ver todas</a>
+      </div>
+      
+      <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Cargando publicaciones...</p>
+      </div>
+      
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+      
+      <div *ngIf="!loading && !error">
+        <div *ngIf="recentPosts.length === 0" class="no-posts">
+          <p>No hay publicaciones recientes.</p>
+        </div>
+        
+        <div class="post-grid">
+          <div *ngFor="let post of recentPosts" class="post-card">
+            <h3 class="post-title">
+              <a [routerLink]="['/foro/publicacion', post.id]">{{ post.titulo }}</a>
+            </h3>
+            <p class="post-excerpt">{{ post.contenido | slice:0:100 }}{{ post.contenido.length > 100 ? '...' : '' }}</p>
+            <div class="post-meta">
+              <span class="post-author">Por: {{ post.autor }}</span>
+              <a [routerLink]="['/foro/publicacion', post.id]" class="read-more">Leer más</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección de Categorías -->
+    <section class="topics-section">
+      <div class="section-header">
+        <h2>Categorías</h2>
+      </div>
+      
+      <div class="topics-grid">
+        <div *ngFor="let topic of topics" class="topic-card">
+          <h3>{{ topic.nombre }}</h3>
+          <p>{{ topic.descripcion }}</p>
+          <a [routerLink]="['/foro']" [queryParams]="{topic: topic.id}" class="btn btn-sm">Explorar</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Llamado a la acción -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2>¿Listo para compartir tus opiniones?</h2>
+        <p>Únete a nuestra comunidad y comienza a participar en las discusiones.</p>
+        <a routerLink="/auth/registro" class="btn btn-primary">Registrarse Ahora</a>
+      </div>
+    </section>
+  </div>
