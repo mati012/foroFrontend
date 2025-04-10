@@ -6,7 +6,8 @@
   
   /* Hero Section */
   .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/src/assets/cinema.jpg');
+    margin-top: 10px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/1600x900/?nature,water');
     background-size: cover;
     background-position: center;
     color: white;

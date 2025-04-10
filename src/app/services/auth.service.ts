@@ -9,7 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/user';
+  private apiUrl = 'http://localhost:8081/user';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
   private isBrowser: boolean;
@@ -38,12 +38,12 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    // Para una implementación real, deberías usar JWT u otro método de autenticación
+
     return this.http.get<User[]>(`${this.apiUrl}/username/${username}`).pipe(
       tap(users => {
         const user = users[0];
         if (user && user.password === password) {
-          // Eliminar la contraseña antes de almacenar el usuario
+       
           const { password, ...userWithoutPassword } = user;
           
           if (this.isBrowser) {
