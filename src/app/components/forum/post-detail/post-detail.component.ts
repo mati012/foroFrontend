@@ -124,7 +124,7 @@ export class PostDetailComponent implements OnInit {
   isAdmin(): boolean {
     const currentUser = this.authService.currentUserValue;
     // Suponiendo que el role_id 1 es para administradores
-    return currentUser?.role_id === 1;
+    return currentUser?.role?.id === 1;
   }
 
   deleteComment(commentId: number): void {

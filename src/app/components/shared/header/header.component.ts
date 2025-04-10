@@ -29,6 +29,6 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.currentUser?.role_id === 1;
+    return this.currentUser?.role?.id === 1;
   }
 }

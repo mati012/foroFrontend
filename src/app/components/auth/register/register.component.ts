@@ -30,10 +30,12 @@ export class RegisterComponent implements OnInit {
       password: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/)
+        Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,20}$/)
       ]],
       confirmPassword: ['', Validators.required],
-      role_id: [2] // Por defecto: rol de usuario normal
+      role: this.formBuilder.group({
+        id: [2] // Este es el formato correcto que espera el backend
+      })
     }, {
       validator: this.mustMatch('password', 'confirmPassword')
     });
@@ -104,6 +106,8 @@ export class RegisterComponent implements OnInit {
 
   private registerUser(): void {
     const { confirmPassword, ...userToRegister } = this.registerForm.value;
+ 
+    console.log('Datos de registro:', userToRegister); 
     
     this.authService.register(userToRegister).subscribe({
       next: response => {

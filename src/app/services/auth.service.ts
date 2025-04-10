@@ -1,7 +1,7 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -36,14 +36,25 @@ export class AuthService {
   register(user: User): Observable<any> {
     return this.http.post(`${this.apiUrl}`, user);
   }
-
   login(username: string, password: string): Observable<any> {
-
-    return this.http.get<User[]>(`${this.apiUrl}/username/${username}`).pipe(
-      tap(users => {
-        const user = users[0];
+    return this.http.get<any>(`${this.apiUrl}/username/${username}`).pipe(
+      tap(response => {
+        console.log('Respuesta original:', response);
+        
+        // Extraer el usuario del Optional de Java
+        let user;
+        if (response && response.present === true) {
+          // Si viene como un Optional de Java
+          user = response.value;
+        } else if (response && typeof response === 'object') {
+          // Si el Optional ya fue desenvuelto por Spring
+          user = response;
+        }
+        
+        console.log('Usuario extraído:', user);
+        
         if (user && user.password === password) {
-       
+          // Eliminar la contraseña antes de almacenar
           const { password, ...userWithoutPassword } = user;
           
           if (this.isBrowser) {
@@ -51,7 +62,13 @@ export class AuthService {
           }
           
           this.currentUserSubject.next(userWithoutPassword);
+        } else {
+          throw new Error('Credenciales inválidas');
         }
+      }),
+      catchError(error => {
+        console.error('Error en login:', error);
+        return throwError(() => new Error('Credenciales inválidas o usuario no encontrado'));
       })
     );
   }
