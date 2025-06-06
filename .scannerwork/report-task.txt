@@ -2,5 +2,5 @@ projectKey=angular-auth-app
 serverUrl=http://localhost:9000
 serverVersion=25.4.0.105899
 dashboardUrl=http://localhost:9000/dashboard?id=angular-auth-app
-ceTaskId=6b67f90a-7372-4cdc-8c00-61c0d3c35085
-ceTaskUrl=http://localhost:9000/api/ce/task?id=6b67f90a-7372-4cdc-8c00-61c0d3c35085
+ceTaskId=c5547df7-4399-40ce-97b2-c95b85d92ffe
+ceTaskUrl=http://localhost:9000/api/ce/task?id=c5547df7-4399-40ce-97b2-c95b85d92ffe
